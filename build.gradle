@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'java'
+version '0'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml']
+    version = '11.0.2'
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Core.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
